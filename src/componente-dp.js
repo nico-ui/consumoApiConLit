@@ -15,17 +15,25 @@ export class ComponenteDp extends LitElement {
         this.host = "";
         this.path = "";
         this.method = "GET";
-        console.log("this.method: ", this.method);
     }
 
     firstUpdated() {
-        this.getData();
+        this.generarRequest();
 
     }
 
-    generarRequest() {
-
-
+    async generarRequest() {
+        console.log("generarRequest: ");
+        const urlApi = this.host + this.path;
+        await fetch(urlApi, { method: this.method })
+            .then((response) => {
+                console.log("response: ", response);
+                if (response.ok) {
+                    console.log("response ok");
+                    return response.json();
+                } return Promise.reject(response);
+            });
+        console.log("fin");
     }
 
     async getData() {
@@ -34,9 +42,9 @@ export class ComponenteDp extends LitElement {
         await fetch(this.host + this.path, { method: this.method })
             .then((response) => {
                 console.log("response: ", response);
-                if(response.ok){
+                if (response.ok) {
                     return response.json();
-                }return Promise.reject(response);
+                } return Promise.reject(response);
             }).then((data) => {
                 console.log("data: ", data);
 

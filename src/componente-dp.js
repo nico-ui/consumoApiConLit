@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html } from 'lit';
 
 export class ComponenteDp extends LitElement {
 
@@ -16,19 +16,25 @@ export class ComponenteDp extends LitElement {
         this.path = "";
         this.method = "GET";
     }
+    /* 
+        firstUpdated() {
+            console.log("firstUpdated dp: ");
+            this.generarRequest();
 
-    firstUpdated() {
-        this.generarRequest();
-
-    }
+        } */
 
     async generarRequest() {
+        console.log("generarRequest dp: ");
         const urlApi = this.host + this.path;
+        console.log("generarRequest dp: urlApi: ", urlApi);
         await fetch(urlApi, { method: this.method })
             .then((response) => {
                 if (response.ok) {
+                    console.log("generarRequest dp: response.json() dp: ", response);
                     return response.json();
-                } return Promise.reject(response);
+                }
+                console.log("generarRequest dp: Promise.reject(response): ", Promise.reject(response));
+                return Promise.reject(response);
             });
     }
 
@@ -39,9 +45,9 @@ export class ComponenteDp extends LitElement {
                     return response.json();
                 } return Promise.reject(response);
             }).then((data) => {
-                console.log("data: ", data);
+                console.log("data dp: ", data);
             }).catch((error) => {
-                console.log("error: ", error);
+                console.log("error dp: ", error);
             });
     }
 

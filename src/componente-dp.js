@@ -27,7 +27,7 @@ export class ComponenteDp extends LitElement {
         console.log("generarRequest dp: ");
         const urlApi = this.host + this.path;
         console.log("generarRequest dp: urlApi: ", urlApi);
-        await fetch(urlApi, { method: this.method })
+        var a = await fetch(urlApi, { method: this.method })
             .then((response) => {
                 if (response.ok) {
                     console.log("generarRequest dp: response.json() dp: ", response);
@@ -36,6 +36,7 @@ export class ComponenteDp extends LitElement {
                 console.log("generarRequest dp: Promise.reject(response): ", Promise.reject(response));
                 return Promise.reject(response);
             });
+        return a;
     }
 
     async getData() {
